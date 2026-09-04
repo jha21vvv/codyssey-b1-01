@@ -45,7 +45,7 @@ window.addEventListener('scroll', () => {
     scrollTopBtn.classList.remove('show');
   }
 
-  //그림자효과
+  //그림자효과: 클래스 리스트의 속성에 스크롤드가 추가되면 그에따라 css에 쉐이드가 되게 하는 방식
   if (window.scrollY > 60) {
     siteHeader.classList.add('scrolled');
   } else {
@@ -62,9 +62,13 @@ scrollTopBtn.addEventListener('click', () => {
 
 
 // 스크롤 애니메이션
-
+// 어떤 션섹이 화면에 들어올때 반응할지 보기위해, 반응할 세션 리스트를 만듬.
 const revealElements = document.querySelectorAll('.reveal');
 //Intersection Observer: 특정 섹션이 화면내에 들어오자 발동되는 애니메이션으로 나타나는 효과 만들어 놓은것
+//화면에 들어오거나(0% -> 20%) 혹은 화면에서 나갈 때(20% -> 0%) 보고서를 작성합니다. 그 보고서 하나하나가 바로 entry
+//entries의 내용과 지금 화면에 있는 섹션들을(entry.isIntersecting) 하나씩반복 비교함.(forEach)
+//entry중 target은 이번에 추가된 섹션에 클래스로 'show'를 추가해서 해당 css를 입힘.
+// 쇼라는 클래스를 지우는 코드가 없기에 반복은 안되는 셈.
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -75,8 +79,9 @@ const observer = new IntersectionObserver((entries) => {
   threshold: 0.2
 });
 ///threshold는 비율
-// 어떤 션섹이 화면에 들어올때 반응할지 보기위해, 반응할 세션 리스트를 만듬.
+//리빌 엘리먼트의 요소들을 1개씩 반복 실행
 revealElements.forEach((element) => {
+  //그 각요소를 감시
   observer.observe(element);
 });
 
@@ -199,10 +204,12 @@ const projectsContainer = document.querySelector('.projects-list');
 const fetchGitHubRepos = async () => {
   try {
     projectsContainer.textContent = '로딩 중...';
-
+///await:이 작업이 끝날 때까지 다음 줄로 넘어가지 말고 기다려
     const response = await fetch('https://api.github.com/users/jha21vvv/repos');
 
     if (!response.ok) {
+      //throw: 강제로 에러를 발생, 
+      //new Error(): 에러 메시지를 보내는 문구
       throw new Error('GitHub API 요청 실패');
     }
 
@@ -212,7 +219,7 @@ const fetchGitHubRepos = async () => {
       projectsContainer.textContent = '표시할 프로젝트가 없습니다.';
       return;
     }
-
+    //.map(): 배열 안에 있는 아이템들을 하나하나 꺼내서 반복 작업
     const repoCards = repos.map((repo) => {
       return `
         <article class="project-card">
@@ -223,9 +230,10 @@ const fetchGitHubRepos = async () => {
         </article>
       `;
     });
-
+    //join(''): 배열로 된 여러 개의 문자열을 하나의 긴 문자열로 합쳐
     projectsContainer.innerHTML = repoCards.join('');
   } catch (error) {
+    //throw로 던진 에러를 받아서 처리
     projectsContainer.innerHTML = `
       <p>프로젝트를 불러올 수 없습니다.</p>
       <button class="retry-btn">다시 시도</button>
