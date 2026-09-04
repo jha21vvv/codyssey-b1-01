@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>나의 포트폴리오</title>
+
+  <!-- CSS 파일 연결 -->
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <!-- 페이지 상단 영역 -->
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">My Portfolio</h1>
+
+      <!-- 네비게이션 메뉴 -->
+       <!-- 기본적으로 메인에 모든 내용을 넣고 섹션에 분류해서 그걸 누르면 id를 기반으로 해당 섹션으로 이동하는 구조로 보임. -->
+        <nav class="site-nav">
+            <h1 class="logo">My Portfolio</h1>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="다크 모드 토글">🌙</button>
+                <button class="menu-toggle" aria-label="메뉴 열기">☰</button>
+            </div>
+
+            <ul class="nav-list">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+  </header>
+
+  <!-- 페이지의 핵심 내용 -->
+  <main>
+    <!-- Hero 섹션 -->
+    <section id="hero" class="section reveal">
+      <div class="container">
+        <h2>안녕하세요, 저는 안재현입니다.</h2>
+        <p>순수 HTML, CSS, JavaScript로 포트폴리오를 만들고 있습니다.</p>
+        <a href="#projects" class="btn">프로젝트 보기</a>
+      </div>
+    </section>
+
+    <!-- About 섹션 -->
+    <section id="about" class="section reveal">
+      <div class="container">
+        <h2>About</h2>
+        <img src="./images/profile.jpeg" alt="프로필 사진" class="profile-image" />
+        <p>
+          저는 프론트엔드 개발을 공부하고 있으며,
+          반응형 웹사이트와 사용자 인터랙션 구현을 연습하고 있습니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- Skills 섹션 -->
+    <section id="skills" class="section reveal">
+      <div class="container">
+        <h2>Skills</h2>
+        <ul class="skills-list">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Projects 섹션 -->
+    <section id="projects" class="section reveal">
+    <div class="container">
+        <h2>Projects</h2>
+        <div class="projects-list"></div>
+    </div>
+    </section>
+    <!-- 
+    section = 같은 주제의 큰 구역
+    article = 그 안에서 독립적으로 의미가 있는 하나의 콘텐츠
+    div = 의미 없이 묶기만 하는 박스, 내가알기론 css에서 디자인할떄 단위로 써먹던 기억이 있음
+    브라우저나 개발자가 봤을떄 이게 독립된컨텐츠인지 이해할수 있게 해주는 조치임.
+    -->
+
+    <!-- Contact 섹션 -->
+    <section id="contact" class="section reveal">
+    <!-- label : 입력칸의 이름표, input : 실제로 글자를 입력하는 칸,
+      label의 for 값과 input의 id 값이 서로 같으면 연결
+      이메일이라는 글자를 클릭해도 입력칸이 선택, 화면 읽기 프로그램(스크린 리더)이 이 입력칸이 무슨 의미인지 더 잘 읽어줌, 코드를 보는 사람 이해 쉬움 -->
+        <div class="container">
+            <h2>Contact</h2>
+
+            <form id="contact-form" novalidate>
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name" />
+                <small class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" />
+                <small class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="message">메시지</label>
+                <textarea id="message" name="message" rows="5"></textarea>
+                <small class="error-message"></small>
+            </div>
+
+            <button type="submit" class="btn">보내기</button>
+            <p id="form-success" class="success-message"></p>
+            </form>
+        </div>
+    </section>
+  </main>
+
+  <!-- 페이지 하단 영역 -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 나의 포트폴리오. All rights reserved.</p>
+      <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <!-- JavaScript 파일 연결 -->
+  <script src="./js/main.js" defer></script>
+  <button class="scroll-top-btn" aria-label="맨 위로 이동">↑</button>
+</body>
+</html>
