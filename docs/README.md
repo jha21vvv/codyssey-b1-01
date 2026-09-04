@@ -40,8 +40,8 @@ docs/
 - 로딩 / 에러 / 빈 상태 UI 처리
 
 ### 6. 스크린샷
-![desktop](./images/01.png)
 ![desktop](./images/02.png)
+![desktop](./images/04.png)
 ![desktop](./images/03.png)
 
 ### 7. 페이지 구성
