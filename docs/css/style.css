@@ -118,6 +118,21 @@ p {
   color: var(--color-subtext);
 }
 
+#about h2 {
+  margin-bottom: 12px;
+}
+
+#about .profile-image {
+  display: block;
+  width: 180px;
+  margin: 0 auto 12px;
+}
+
+#about p {
+  margin: 0;
+  line-height: 1.6;
+}
+
 /* =========================
    4. 헤더 / 네비게이션
 ========================= */
