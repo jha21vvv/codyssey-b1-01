@@ -47,9 +47,6 @@ html {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
 
 body {
   margin: 0;
@@ -183,14 +180,11 @@ rem: 폰이든 모니터든 자동으로 rem이 바뀌는 게 아니라 기본�
   display: block;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   cursor: pointer;
   color: var(--color-text);
 }
 
-.menu-toggle {
-  font-size: 1.8rem;
-}
 
 .nav-list {
   display: none;
@@ -209,6 +203,7 @@ rem: 폰이든 모니터든 자동으로 rem이 바뀌는 게 아니라 기본�
   color: var(--color-text);
   transition: color 0.3s ease;
 }
+/* color (대상): 어떤 속성에 애니메이션을 줄 것인가?,0.3s (시간): 얼마나 오랫동안 변할 것인가?, ease (방식): 어떤 느낌으로 변할 것인가? */
 
 .nav-list a:hover {
   color: var(--color-primary);

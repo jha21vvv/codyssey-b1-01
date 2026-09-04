@@ -123,6 +123,25 @@ docs/
 
 
 ### 추가 게인적 정보 기록
+# 1. 모바일 퍼스트란 점
+ - @media (min-width: ...)로 기능/레이아웃을 추가
+```bash 
+.menu-toggle {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+# 최소너비가 768px이상인, 즉 테블렛에선 토글이 안보인다는 내용
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+```
+# 2. 주석 적는 방법
 ```bash 
 # html주석
 <!-- 주석 내용 -->
