@@ -23,6 +23,7 @@ themeToggle.addEventListener('click', () => {
 
   if (currentTheme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'light');
+    //로컬 스토리지 저장에 대한 내용. 다시와도 다크 모드이도록
     localStorage.setItem('theme', 'light');
     themeToggle.textContent = '🌙';
   } else {
