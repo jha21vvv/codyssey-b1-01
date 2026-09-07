@@ -178,3 +178,89 @@ docs/
 </body>
 </html>
 ```
+학습 과제 관련 질문
+- HTML에서 시맨틱 태그를 왜 사용하는지 또한 본인이 어떤 기준으로 구조를 설계했는지 설명할 수 있다.
+> 시맨틱 태그: 단순히 화면에 내용을 보여주는 것을 넘어 브라우저, 검색엔진, 스크린 리더(시각장애인용 도구)에게 "이 영역이 문서에서 무슨 역할을 하는지" 명확히 알려주기 위해 사용
+> 주로 해당 부분이나 함수들의 기능을 기반으로 설계
+> 필수적 요소부터 상세순서로 
+- CSS에서 Flexbox와 Grid의 차이, 그리고 언제 각각을 선택해야 하는지 설명할 수 있다.
+> 플랙스 박스는 공간의 변환에 따라 내부 요소들의 배치 변경, 세로에서 가로로
+> 그리드는 일정 형태의 바둑판식 배열
+- querySelector로 DOM을 선택하고, addEventListener로 이벤트를 연결하는 흐름을 설명할 수 있다.
+> querySelector는 html의 div로 이름 정해놓은거 불러오는 방식
+> addEventListener는 해당이 클릭되거나 그위에 마우스가 올려졌을때 등을 넣을수 있음
+- 화살표 함수, 구조분해 할당, 배열 메서드(map/filter)가 왜 필요하고 어떻게 사용하는지 설명할 수 있다.
+> 화살표 함수는 간단하고 디스 오류 문제가 없다.
+> 디스 오류라 함은 해당 함수를 하는 주체가 누구냐의 문제인데 이게 생길 우려가 적어진다.
+> 구조할당 배당
+```bash
+// 현재 깃허브 코드 안쪽
+<h3>${repo.name}</h3>
+<p>${repo.description ?? '설명이 없습니다.'}</p>
+
+// 택배 상자(repo)에서 필요한 알맹이만 쏙 꺼내기
+const { name, description } = repo;
+
+// 이제 'repo.' 없이 바로 씁니다.
+<h3>${name}</h3>
+<p>${description ?? '설명이 없습니다.'}</p>
+```
+>배열 메소드
+```bash
+const repoCards = repos.map((repo) => {
+  return `
+    <article class="project-card">
+      <h3>${repo.name}</h3>
+    </article>
+  `;
+});
+```
+- fetch와 async/await로 비동기 데이터를 가져오고, 로딩/성공/실패 상태를 UI로 어떻게 표현했는지 설명할 수 있다.
+> 서버에서 데이터를 받아오는 동안 사용자가 "멈춘 건가?" 착각하지 않도록 로딩, 성공, 실패 3단계를 명확히 처리
+```bash
+const fetchGitHubRepos = async () => {
+  try {
+    // 1단계: 로딩 상태 (음식 시키고 기다리는 중)
+    projectsContainer.textContent = '로딩 중...';
+
+    // 인터넷으로 깃허브에 데이터 달라고 주문 넣기 (await: 올 때까지 기다려!)
+    const response = await fetch('https://api.github.com/users/jha21vvv/repos');
+    const repos = await response.json();
+
+    // 2단계: 성공 상태 (음식 도착해서 먹는 중)
+    projectsContainer.innerHTML = repoCards.join('');
+
+  } catch (error) {
+    // 3단계: 실패 상태 (가게가 문 닫았거나 배달 사고 났을 때)
+    projectsContainer.innerHTML = `
+      <p>프로젝트를 불러올 수 없습니다.</p>
+      <button class="retry-btn">다시 시도</button>
+    `;
+  }
+};
+```
+- "하나의 기능"을 만들기 위해 이벤트 → 상태 변경 → DOM 업데이트가 어떻게 연결되는지 설명할 수 있다. (React의 상태-렌더링 흐름의 기초)
+```bash
+// 1. 이벤트 (사용자가 스위치를 누름)
+themeToggle.addEventListener('click', () => {
+
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+
+  if (currentTheme === 'dark') {
+    // 2. 상태 변경 (컴퓨터 메모리 안의 스위치 값을 'light'로 쓱 바꿈)
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
+
+    // 3. DOM 업데이트 (변경된 스위치 값에 맞춰 눈에 보이는 화면 글자를 바꿈)
+    themeToggle.textContent = '🌙';
+    
+  } else {
+    // 2. 상태 변경 (컴퓨터 메모리 안의 스위치 값을 'dark'로 쓱 바꿈)
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+
+    // 3. DOM 업데이트 (화면 글자를 해(☀️)로 바꿈)
+    themeToggle.textContent = '☀️';
+  }
+});
+```
